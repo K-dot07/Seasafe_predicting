@@ -53,4 +53,77 @@ The algorithm is implemented fully in **JavaScript** (`app.js`).
 ---
 
 ## 📁 Project Structure
+SeaSafe/
+│── index.html        # Main UI
+│── style.css         # Styling
+│── app.js            # Prediction logic & interactivity
+└── assets/           # Images (icons, backgrounds)
+
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5**
+- **CSS3**
+- **JavaScript (ES6)**
+- Works on any static hosting (Neocities, GitHub Pages, Vercel)
+
+---
+
+## 🚀 How to Run Locally
+
+1. Download or clone the repository:
+   ```bash
+   git clone https://github.com/your-username/SeaSafe.git
+
+
+
+Open the folder:
+cd SeaSafe
+
+
+
+Run by simply opening index.html in any browser.
+No server required.
+
+
+
+🔮 Future Enhancements (Optional)
+
+
+Integrate real weather API (OpenWeather, StormGlass)
+
+
+Use a trained machine learning model (Python → TensorFlow.js)
+
+
+Add database storage for predictions
+
+
+Add risk alerts and travel recommendations
+
+
+Visualization dashboard using Chart.js
+
+
+
+📜 License
+This project is open-source under the MIT License.
+
+👤 Author
+Kalaiselvan K
+Final-year IT Student
+Passionate about Python development & software projects.
+
+---
+
+If you want, I can also:
+
+✅ Make this README more advanced  
+✅ Add images, badges, GitHub shields  
+✅ Create a professional GitHub repository structure  
+✅ Improve your SeaSafe UI or algorithm  
+
+Just tell me!
+
 
