@@ -1,0 +1,32 @@
+Table,Column,Data_Type,Description
+users,id,UUID PRIMARY KEY,Unique user identifier
+users,email,VARCHAR(255) UNIQUE,User email address
+users,password_hash,VARCHAR(255),Hashed password
+users,created_at,TIMESTAMP,Account creation timestamp
+users,last_login,TIMESTAMP,Last login time
+ships,id,UUID PRIMARY KEY,Unique ship identifier
+ships,name,VARCHAR(255),Ship name/identifier
+ships,type,VARCHAR(100),Ship classification
+ships,length,"DECIMAL(8,2)",Ship length in meters
+ships,passenger_capacity,INTEGER,Maximum passenger capacity
+ships,year_built,INTEGER,Year of construction
+routes,id,UUID PRIMARY KEY,Unique route identifier
+routes,user_id,UUID FOREIGN KEY,Reference to user who created route
+routes,origin,VARCHAR(255),Departure location
+routes,destination,VARCHAR(255),Arrival destination
+routes,departure_time,TIMESTAMP,Scheduled departure time
+routes,estimated_duration,INTEGER,Expected travel duration in hours
+weather_data,id,UUID PRIMARY KEY,Unique weather record identifier
+weather_data,route_id,UUID FOREIGN KEY,Reference to associated route
+weather_data,timestamp,TIMESTAMP,Weather observation time
+weather_data,wind_speed,"DECIMAL(5,2)",Wind speed in knots
+weather_data,wave_height,"DECIMAL(5,2)",Significant wave height in meters
+predictions,id,UUID PRIMARY KEY,Unique prediction identifier
+predictions,route_id,UUID FOREIGN KEY,Reference to predicted route
+predictions,survival_probability,"DECIMAL(5,4)",Calculated survival probability (0-1)
+predictions,risk_level,VARCHAR(50),Risk assessment (Good/Medium/Hard)
+predictions,confidence_score,"DECIMAL(5,4)",Model confidence level (0-1)
+historical_data,id,SERIAL PRIMARY KEY,Training data record ID
+historical_data,ship_class,INTEGER,"Passenger class (1,2,3)"
+historical_data,age,INTEGER,Passenger age
+historical_data,survived,BOOLEAN,Survival outcome (0/1)

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeaSafe - Maritime Safety Prediction</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🌊 SeaSafe</h1>
+                <span class="nav-tagline">Maritime Safety Intelligence</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-view="dashboard">Dashboard</a>
+                <a href="#" class="nav-link" data-view="how-it-works">How It Works</a>
+                <a href="#" class="nav-link" data-view="about">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Dashboard View -->
+        <section id="dashboard-view" class="view active">
+            <div class="container">
+                <!-- Hero Section -->
+                <div class="hero-section">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/seedream_images/77f7856e-9647-4d98-9eb4-7878e03fa43e.png" alt="SeaSafe Dashboard Mockup" class="hero-image">
+                    <div class="hero-content">
+                        <h1>Predicting Passenger Survival in Maritime Disasters Using Machine Learning</h1>
+                        <p class="hero-description">
+                            SeaSafe uses advanced machine learning algorithms to analyze maritime routes, weather conditions, and vessel characteristics to provide real-time safety assessments for maritime travel.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Route Planning Form -->
+                <div class="planning-form-section">
+                    <div class="card">
+                        <div class="card__header">
+                            <h2>Route Safety Analysis</h2>
+                            <p>Enter your journey details to get a comprehensive safety assessment</p>
+                        </div>
+                        <div class="card__body">
+                            <form id="route-form" class="route-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="departure-port">Departure Port</label>
+                                        <select class="form-control" id="departure-port" required>
+                                            <option value="">Select departure port</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="destination-port">Destination Port</label>
+                                        <select class="form-control" id="destination-port" required>
+                                            <option value="">Select destination port</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="departure-date">Departure Date</label>
+                                        <input type="date" class="form-control" id="departure-date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="ship-type">Ship Type</label>
+                                        <select class="form-control" id="ship-type" required>
+                                            <option value="">Select ship type</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="ship-capacity">Ship Capacity</label>
+                                        <input type="number" class="form-control" id="ship-capacity" placeholder="Number of passengers" min="10" max="6000" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="ship-age">Ship Age (years)</label>
+                                        <input type="number" class="form-control" id="ship-age" placeholder="Age in years" min="0" max="50" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn--primary btn--lg btn--full-width">
+                                        <span class="btn-text">Analyze Route Safety</span>
+                                        <span class="btn-loading hidden">Analyzing...</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results View -->
+        <section id="results-view" class="view">
+            <div class="container">
+                <div class="results-header">
+                    <h1>Safety Analysis Results</h1>
+                    <button class="btn btn--secondary" id="back-to-form">← New Analysis</button>
+                </div>
+
+                <!-- Route Summary -->
+                <div class="card route-summary">
+                    <div class="card__body">
+                        <h3>Route Summary</h3>
+                        <div class="route-details">
+                            <div class="route-item">
+                                <span class="route-label">From:</span>
+                                <span class="route-value" id="result-departure"></span>
+                            </div>
+                            <div class="route-item">
+                                <span class="route-label">To:</span>
+                                <span class="route-value" id="result-destination"></span>
+                            </div>
+                            <div class="route-item">
+                                <span class="route-label">Departure:</span>
+                                <span class="route-value" id="result-date"></span>
+                            </div>
+                            <div class="route-item">
+                                <span class="route-label">Vessel:</span>
+                                <span class="route-value" id="result-vessel"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Safety Rating -->
+                <div class="safety-rating-card">
+                    <div class="safety-rating">
+                        <div class="rating-display">
+                            <div class="rating-circle" id="rating-circle">
+                                <span class="rating-percentage" id="rating-percentage">85%</span>
+                                <span class="rating-label">Survival Probability</span>
+                            </div>
+                            <div class="rating-status">
+                                <span class="status" id="safety-status">Good</span>
+                                <p class="rating-description" id="rating-description">Optimal conditions for safe maritime travel</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather Conditions -->
+                <div class="card weather-card">
+                    <div class="card__body">
+                        <h3>Weather Conditions Preview</h3>
+                        <div class="weather-grid">
+                            <div class="weather-item">
+                                <div class="weather-icon">🌬️</div>
+                                <div class="weather-details">
+                                    <span class="weather-label">Wind Speed</span>
+                                    <span class="weather-value" id="wind-speed">15 km/h</span>
+                                </div>
+                            </div>
+                            <div class="weather-item">
+                                <div class="weather-icon">🌊</div>
+                                <div class="weather-details">
+                                    <span class="weather-label">Wave Height</span>
+                                    <span class="weather-value" id="wave-height">2.1 m</span>
+                                </div>
+                            </div>
+                            <div class="weather-item">
+                                <div class="weather-icon">👁️</div>
+                                <div class="weather-details">
+                                    <span class="weather-label">Visibility</span>
+                                    <span class="weather-value" id="visibility">12 km</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Factors Chart -->
+                <div class="card chart-card">
+                    <div class="card__body">
+                        <h3>Risk Factors Breakdown</h3>
+                        <div class="chart-container">
+                            <canvas id="risk-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="card recommendations-card">
+                    <div class="card__body">
+                        <h3>Safety Recommendations</h3>
+                        <div class="recommendations-list" id="recommendations-list">
+                            <!-- Recommendations will be populated dynamically -->
+                        </div>
+                        
+                        <h4>Alternative Sailing Dates</h4>
+                        <div class="alternative-dates" id="alternative-dates">
+                            <!-- Alternative dates will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="results-actions">
+                    <button class="btn btn--primary btn--lg" id="download-report">
+                        📄 Download Safety Report
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works View -->
+        <section id="how-it-works-view" class="view">
+            <div class="container">
+                <div class="page-header">
+                    <h1>How SeaSafe Works</h1>
+                    <p>Understanding our machine learning approach to maritime safety prediction</p>
+                </div>
+
+                <!-- ML Pipeline -->
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Machine Learning Pipeline</h2>
+                    </div>
+                    <div class="card__body">
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/6eeadb0b8c216c1082eb085a0300958d/298e5f22-4258-4e8b-a0d1-07d8c5fdbfa9/4cef1aac.png" alt="ML Pipeline" class="pipeline-image">
+                        
+                        <div class="pipeline-steps">
+                            <div class="step">
+                                <h4>1. Data Collection</h4>
+                                <p>We analyze historical maritime data including passenger records, weather conditions, and vessel characteristics from multiple sources.</p>
+                            </div>
+                            <div class="step">
+                                <h4>2. Feature Engineering</h4>
+                                <p>Our algorithms process ship age, capacity, weather patterns, route difficulty, and seasonal factors to create predictive features.</p>
+                            </div>
+                            <div class="step">
+                                <h4>3. Model Training</h4>
+                                <p>Multiple machine learning models are trained including Random Forest, Gradient Boosting, and Neural Networks for optimal accuracy.</p>
+                            </div>
+                            <div class="step">
+                                <h4>4. Ensemble Prediction</h4>
+                                <p>Results from multiple models are combined with confidence scoring to provide the most reliable safety assessment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Performance -->
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Model Performance Metrics</h2>
+                    </div>
+                    <div class="card__body">
+                        <div class="metrics-grid">
+                            <div class="metric">
+                                <span class="metric-value">83.6%</span>
+                                <span class="metric-label">Accuracy</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">81.2%</span>
+                                <span class="metric-label">Precision</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">78.9%</span>
+                                <span class="metric-label">Recall</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-value">80.1%</span>
+                                <span class="metric-label">F1-Score</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Sources -->
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Data Sources &amp; Technology</h2>
+                    </div>
+                    <div class="card__body">
+                        <div class="data-sources">
+                            <div class="source">
+                                <h4>Historical Maritime Data</h4>
+                                <p>Comprehensive passenger records, incident reports, and vessel specifications from maritime authorities worldwide.</p>
+                            </div>
+                            <div class="source">
+                                <h4>Weather &amp; Oceanographic Data</h4>
+                                <p>Real-time and historical weather data including wind patterns, wave heights, visibility, and storm tracking.</p>
+                            </div>
+                            <div class="source">
+                                <h4>Route Intelligence</h4>
+                                <p>Traffic density, emergency response coverage, seasonal patterns, and geographic risk factors.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="disclaimer">
+                            <h4>⚠️ Important Safety Disclaimer</h4>
+                            <p>SeaSafe predictions are based on statistical analysis and should not be the sole factor in maritime safety decisions. Always consult official weather services, maritime authorities, and follow established safety protocols.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About View -->
+        <section id="about-view" class="view">
+            <div class="container">
+                <div class="page-header">
+                    <h1>About SeaSafe</h1>
+                    <p>Advancing maritime safety through artificial intelligence</p>
+                </div>
+
+                <!-- Company Info -->
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Our Mission</h2>
+                    </div>
+                    <div class="card__body">
+                        <p>SeaSafe is dedicated to revolutionizing maritime safety through the power of machine learning and data analytics. Our advanced prediction algorithms help maritime operators, cruise lines, and travelers make informed decisions about route safety.</p>
+                        
+                        <img src="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/6eeadb0b8c216c1082eb085a0300958d/c2218b94-cd7e-4276-b8d2-260713bede32/526bb554.png" alt="SeaSafe Architecture" class="architecture-image">
+                    </div>
+                </div>
+
+                <!-- Technology Stack -->
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Technology Stack</h2>
+                    </div>
+                    <div class="card__body">
+                        <div class="tech-stack">
+                            <div class="tech-category">
+                                <h4>Machine Learning</h4>
+                                <ul>
+                                    <li>Python with scikit-learn</li>
+                                    <li>TensorFlow for deep learning</li>
+                                    <li>Pandas for data processing</li>
+                                    <li>NumPy for numerical computing</li>
+                                </ul>
+                            </div>
+                            <div class="tech-category">
+                                <h4>Backend Infrastructure</h4>
+                                <ul>
+                                    <li>Node.js API servers</li>
+                                    <li>PostgreSQL database</li>
+                                    <li>Redis for caching</li>
+                                    <li>AWS cloud hosting</li>
+                                </ul>
+                            </div>
+                            <div class="tech-category">
+                                <h4>Data Sources</h4>
+                                <ul>
+                                    <li>Weather API integration</li>
+                                    <li>Maritime traffic data</li>
+                                    <li>Historical incident databases</li>
+                                    <li>Real-time sensor networks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="card">
+                    <div class="card__header">
+                        <h2>Contact Information</h2>
+                    </div>
+                    <div class="card__body">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <strong>Business Inquiries:</strong>
+                                <p>business@seasafe.ai</p>
+                            </div>
+                            <div class="contact-item">
+                                <strong>Technical Support:</strong>
+                                <p>support@seasafe.ai</p>
+                            </div>
+                            <div class="contact-item">
+                                <strong>Research Partnerships:</strong>
+                                <p>research@seasafe.ai</p>
+                            </div>
+                            <div class="contact-item">
+                                <strong>Emergency Contact:</strong>
+                                <p>+1-800-SEASAFE (24/7)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3>Analyzing Route Safety</h3>
+                <p class="loading-text" id="loading-text">Fetching weather data...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

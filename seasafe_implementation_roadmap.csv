@@ -1,0 +1,24 @@
+Phase,Task,Duration_Days,Dependencies,Deliverables,Start_Day,End_Day
+Phase 1: Planning & Setup,Project Setup & Environment Configuration,3,None,"Dev environment, Git repo, tech stack selection",1,3
+Phase 1: Planning & Setup,Database Design & Schema Creation,2,Project Setup,"Database schema, ERD, migration scripts",4,5
+Phase 1: Planning & Setup,Weather API Integration Research,2,None,"Weather API evaluation, integration plan",6,7
+Phase 1: Planning & Setup,Dataset Collection & Preparation,3,Project Setup,"Clean datasets, data dictionary",8,10
+Phase 2: Data & ML Pipeline,Titanic Dataset Processing & Feature Engineering,5,Dataset Collection,"Processed Titanic data, engineered features",11,15
+Phase 2: Data & ML Pipeline,Weather Data Integration Pipeline,4,Weather API Research,Weather data fetching pipeline,16,19
+Phase 2: Data & ML Pipeline,"ML Model Development (XGBoost, Random Forest, Neural Networks)",7,Titanic Dataset Processing,"Trained ML models, model artifacts",20,26
+Phase 2: Data & ML Pipeline,Model Training & Hyperparameter Tuning,3,ML Model Development,"Optimized models, evaluation metrics",27,29
+Phase 2: Data & ML Pipeline,Model Evaluation & Ensemble Creation,3,Model Training,"Ensemble model, prediction pipeline",30,32
+Phase 3: Backend Development,REST API Development,5,Database Schema,"REST API endpoints, documentation",33,37
+Phase 3: Backend Development,Database Integration & ORM Setup,3,REST API Development,"Database models, ORM configuration",38,40
+Phase 3: Backend Development,Authentication & Security Implementation,4,Database Integration,"User auth system, security middleware",41,44
+Phase 3: Backend Development,Weather Service Integration,3,Weather Data Pipeline,Weather service integration,45,47
+Phase 4: Frontend Development,Frontend Architecture Setup (React/Vue.js),4,Backend API,"Frontend project structure, routing",48,51
+Phase 4: Frontend Development,UI/UX Implementation,6,Frontend Architecture,"Complete UI components, styling",52,57
+Phase 4: Frontend Development,Route Input & Results Display Components,4,UI/UX Implementation,"Interactive route input, results display",58,61
+Phase 4: Frontend Development,Mobile Responsive Design,3,Route Input Components,Mobile-friendly responsive design,62,64
+Phase 5: Integration & Testing,API Integration Testing,3,Backend & Frontend Complete,"API integration, error handling",65,67
+Phase 5: Integration & Testing,End-to-End Testing,4,API Integration Testing,"Test suites, bug fixes",68,71
+Phase 5: Integration & Testing,Performance Optimization,2,End-to-End Testing,"Optimized performance, monitoring",72,73
+Phase 6: Deployment & Launch,Production Environment Setup,2,Performance Optimization,"Production server, domain setup",74,75
+Phase 6: Deployment & Launch,CI/CD Pipeline Configuration,2,Production Environment,Automated deployment pipeline,76,77
+Phase 6: Deployment & Launch,Launch & Monitoring Setup,2,CI/CD Pipeline,"Live application, monitoring dashboard",78,79
